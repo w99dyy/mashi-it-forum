@@ -1,5 +1,5 @@
-require 'net/http'
-require 'json'
+require "net/http"
+require "json"
 
 class ApplicationController < ActionController::Base
     before_action :sync_mashit_avatar
@@ -48,5 +48,4 @@ class ApplicationController < ActionController::Base
     end
 
     MASHIT_API_URL = "https://avatar-artists-guild.web.app/api/mashers/latest"
-
 end

@@ -20,7 +20,7 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 
 # for threaded(nested) comments
-gem 'closure_tree'
+gem "closure_tree"
 
 # Authentication
 gem "devise", "~> 5.0"

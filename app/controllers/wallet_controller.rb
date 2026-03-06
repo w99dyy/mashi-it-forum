@@ -1,9 +1,9 @@
 # app/controllers/wallet_controller.rb
-require 'net/http'
-require 'json'
+require "net/http"
+require "json"
 
 class WalletController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:check_availability, :connect, :disconnect]
+  skip_before_action :verify_authenticity_token, only: [ :check_availability, :connect, :disconnect ]
   before_action :authenticate_user!
 
   MASHIT_API_URL = "https://avatar-artists-guild.web.app/api/mashers/latest"

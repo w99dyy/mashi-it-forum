@@ -37,5 +37,4 @@ class User < ApplicationRecord
       rescue JSON::ParserError
       []
     end
-
 end
