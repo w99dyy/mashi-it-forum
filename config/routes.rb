@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   patch "/users/:username", to: "profiles#update"
 
 
-  # post "wallet/check_availability", to: "wallet#check_availability"
-  # post "wallet/connect", to: "wallet#connect"
-  # post "wallet/disconnect", to: "wallet#disconnect"
+  post '/wallet/check_availability', to: 'wallet#check_availability'
+  post '/wallet/connect',            to: 'wallet#connect'
+  post '/wallet/disconnect',         to: 'wallet#disconnect'
 end
