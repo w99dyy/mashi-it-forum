@@ -1,7 +1,7 @@
 <div id="<%= dom_id post %>" class="w-full sm:w-auto my-4 ">
 <div class="flex max-w-full md:max-w-5xl mx-auto border-gray-700">
 
-<% if user_signed_in? && current_user == @post.user %>
+<% if user_signed_in? && (current_user.admin? || current_user == @post.user) %>
 
  <!-- 3 dots menu -->
         <div class="absolute top-27 md:right-90 inline-block ">
@@ -40,7 +40,7 @@
     <% if @post.tags.any? %>
       <% @post.tags.each do |tag| %>
         <%= link_to tag.name, topic_posts_path(tag: tag.name),
-              class: "bg-blue-700 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-600" %>
+              class: "bg-[#de7200] text-white px-3 py-1 rounded-full text-sm hover:bg-[#df8322]" %>
       <% end %>
     <% else %>
       <p class="text-gray-400">No tags yet</p>
