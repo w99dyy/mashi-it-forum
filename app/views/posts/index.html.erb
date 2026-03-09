@@ -1,69 +1,66 @@
 <div class="posts-page px-3">
   <!-- Page Header -->
-  <%= link_to "New Post", new_topic_post_path(@topic) %>
+  <%= link_to "New Post", new_topic_post_path(@topic), class: "max-w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-[#ed5024] hover:bg-[#e0603c] inline-block font-medium float-right" %>
 
-  <div class="mb-2">
-    <h1 class="text-2xl font-bold text-white mb-4"><%= t :All_Posts %></h1>
-    <p class="text-gray-400 text-sm border-b border-[#2a2a2a] pb-4"><%= t :Browse_all_posts %></p>
+  <div class="mb-2 border-b border-[#2a2a2a] pb-8">
+    <h1 class="text-2xl font-bold text-white mb-4"> All Posts </h1>
+    <p class="text-gray-400 text-sm "> Browse all posts </p>
+    <p class="float-right text-gray-400">Activity</p>
+    <p class="text-gray-400 float-right pr-5"> Comments </p>
   </div>
 
   <!-- Posts List -->
-
   <div class="posts-container divide-y divide-[#2a2a2a]">
   
     <% if @posts.any? %>
       <% @posts.each do |post| %>
-        <div class="post-card  p-2 mb-2">
+        <div class="post-card  p-2 mb-3 pb-6">
+
+        <div class="float-left pr-5">
+
+            <%= render 'layouts/mashit_avatar_sm', user: @topic.user %>
+            </div>
+
+                <!-- Post Metadata -->
+          
+          <div class="text-gray-400 float-right">
+            <div class="flex items-center gap-17">
+              <span> <%= post.comments.count %> </span>
+              <span> <%= time_ago_in_words(post.updated_at) %> </span>
+            </div>
+            </div>
         
           <!-- thumbnail -->
             <% if post.thumbnail %>
               <%= link_to image_tag(post.thumbnail.representation(resize_to_limit: [100, 100])), topic_post_path(@topic, post), class: "float-left pr-5" %>
             <% end %>
+
+              
           
           <!-- Post Title -->
 
-          <h2 class="text-l font-bold text-white mb-3 ">
+          <h2 class="text-l font-bold mb-3 ">
            <%= link_to truncate(post.title, length: 100), topic_post_path(@topic, post), class: "hover:text-[#ababab] transition" %>
 
           </h2>
-          
-          <!-- Post Content Preview -->
-
-          <div class="post-content mb-4">
-            <p class="text-gray-300 leading-relaxed">
-              <%= link_to strip_tags(post.body), topic_post_path(@topic, post) %>
-            </p>
-          </div>
 
           <!-- Tags -->
 
           <% if post.tags.any? %>
-            <div class="tags mb-4">
+            <div class="tags">
               <div class="flex flex-wrap gap-2">
                 <% post.tags.each do |tag| %>
                  <%= link_to tag.name, topic_posts_path(tag: tag.name),
-                class: "bg-blue-700 text-white px-4 rounded-full text-sm hover:bg-blue-600" %>
+                class: "bg-[#de7200] text-white px-4 rounded-full text-sm hover:bg-[#df8322]" %>
 
                 <% end %>
+            
               </div>
             </div>
           <% end %>
-          
-          
-          <!-- Post Metadata -->
-          
-          <div class="flex justify-between text-sm text-gray-400">
-            <div>
-              <span class="mr-1">
-              <%= t :Posted%> <%= time_ago_in_words(post.updated_at) %> ago</span>
-              <% if post.updated_at.present? && post.updated_at > post.created_at + 1.minute %>
-                • <span>Edited <%= time_ago_in_words(post.updated_at) %> ago</span>
-              <% end %>
-              <%= pluralize(post.comments.count, 'comment') %>
 
-            </div>
+        
             
-            </div>
           </div>
         <% end %>
       <% else %>
@@ -74,7 +71,7 @@
         <h3 class="text-2xl font-bold text-white mb-2">No posts yet</h3>
         <p class="text-gray-400 mb-6">Be the first to share your wondeful art!</p>
         <%= link_to "Create Post", new_topic_post_path, 
-            class: "bg-blue-700 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition" %>
+            class: "bg-[#ed5024] hover:bg-[#e0603c] text-white px-6 py-3 rounded-lg font-semibold transition" %>
       </div>
     <% end %>
   </div>
