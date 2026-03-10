@@ -37,4 +37,9 @@ class User < ApplicationRecord
       rescue JSON::ParserError
       []
     end
+
+    def to_param
+      username
+    end
+
 end
