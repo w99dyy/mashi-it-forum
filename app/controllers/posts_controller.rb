@@ -53,11 +53,18 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    @post.destroy!
+    if current_user.admin? || @post.user == current_user
+      @post.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to topic_posts_path(@topic), notice: "Post was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to topic_posts_path(@topic), notice: "Post was successfully destroyed.", status: :see_other }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, alert: "Not authorized!" }
+        format.json { redner json: {error: "Not authorized"}, status: :forbidden }
+      end 
     end
   end
 
