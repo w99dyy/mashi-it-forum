@@ -1,23 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe "Wallets", type: :request do
-  describe "GET /connect" do
+  describe "POST /connect" do
     it "returns http success" do
-      get "/wallet/connect"
+      post "/wallet/connect"
+
+      follow_redirect!
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /disconnect" do
+  describe "POST /disconnect" do
     it "returns http success" do
-      get "/wallet/disconnect"
+      post "/wallet/disconnect"
+
+      follow_redirect!
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /update_avatar" do
+  describe "POST /wallet/check_availability" do
     it "returns http success" do
-      get "/wallet/update_avatar"
+      post "/wallet/check_availability"
+
+      follow_redirect!
       expect(response).to have_http_status(:success)
     end
   end
