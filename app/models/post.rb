@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-    belongs_to :topic
+    belongs_to :topic, counter_cache: true
     belongs_to :user
     has_many :comments, dependent: :destroy
     has_rich_text :body
@@ -16,8 +16,8 @@ class Post < ApplicationRecord
 
 
   validates :title, presence: { message: "cannot be blank!" },
-                    length: { 
-                      minimum: 10, 
+                    length: {
+                      minimum: 10,
                       maximum: 100,
                       too_short: "must be at least %{count} characters long",
                       too_long: "cannot exceed %{count} characters"
