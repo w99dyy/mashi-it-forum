@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
   has_many :topics, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -41,5 +41,4 @@ class User < ApplicationRecord
     def to_param
       username
     end
-
 end
