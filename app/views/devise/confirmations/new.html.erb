@@ -1,16 +1,24 @@
-<h2>Resend confirmation instructions</h2>
+<div class="text-center rounded-md pt-1 pb-5 mt-7 mx-auto ring shadow-xl ring-gray-900/5 focus:outline-none">
+  <h2 class="text-xl font-bold pt-7 pb-4">Resend Email verification</h2>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= form_for(resource, as: resource_name, url: user_confirmation_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <p><%= f.label :email %></p>
-    <p><%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %></p>
-  </div>
+    <div class="field">
+      <p><%= f.label :email %></p>
+      <p><%= f.email_field :email, autofocus: true, 
+      class: "border-2 border-[#2a2a2a] rounded-full focus:outline-none px-4 py-1" , 
+        autocomplete: "email", 
+        value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %></p>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
+    <div class="actions bg-[#ed5024] hover:bg-[#e0603c] mt-4 pt-1 pb-1 pr-10 pl-10 mb-2 inline-block text-white font-medium  rounded-full shadow transition duration-200">
+      <%= f.submit "Resend verification" %>
+    </div>
+  <% end %>
+  <div class="border-b pt-4 mb-3 border-[#2a2a2a]"> </div>
 
-<%= render "devise/shared/links" %>
+
+  <%= render "devise/shared/links" %>
+
+</div>
