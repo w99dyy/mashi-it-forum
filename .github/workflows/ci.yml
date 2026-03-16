@@ -39,6 +39,9 @@ jobs:
         with:
           bundler-cache: true
 
+      - name: Install libvips
+        run: sudo apt-get install -y libvips
+
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: bin/importmap audit
 
@@ -128,7 +131,7 @@ jobs:
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libpq-dev
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libpq-dev libvips
 
       - name: Checkout code
         uses: actions/checkout@v6
