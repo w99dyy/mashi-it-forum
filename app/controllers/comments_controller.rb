@@ -12,9 +12,7 @@ class CommentsController < ApplicationController
         format.turbo_stream
         format.html { redirect_to topic_post_url(@topic, @post), notice: "Comment was successfully created." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("comment_form",
-        partial: "comments/form",
-        locals: { comment: @comment, topic: @topic, post: @post }) }
+        format.turbo_stream
         format.html { render :new, status: :unprocessable_entity }
       end
     end
