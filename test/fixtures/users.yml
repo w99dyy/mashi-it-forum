@@ -1,0 +1,5 @@
+one:
+  email: test@example.com
+  username: testuser
+  encrypted_password: <%= BCrypt::Password.create('password') %>
+  confirmed_at: <%= Time.now %>

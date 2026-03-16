@@ -3,7 +3,5 @@
 one:
   title: MyString
   body: MyText
-
-two:
-  title: MyString
-  body: MyText
+  user: one
+  topic: one
