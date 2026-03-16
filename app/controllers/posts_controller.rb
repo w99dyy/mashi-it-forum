@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   def show
     @post = @topic.posts.find(params[:id])
     @comments = @post.comments.order(created_at: :desc)
-    @comment = Comment.new  # ← Not associated with @post yet
+    @comment = Comment.new
   end
 
   # GET /posts/new
