@@ -8,6 +8,9 @@ on:
 jobs:
   scan_ruby:
     runs-on: ubuntu-latest
+    steps:
+      - name: Install libvips
+        run: sudo apt-get install -y libvips
 
     steps:
       - name: Checkout code
