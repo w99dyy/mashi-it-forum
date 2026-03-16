@@ -20,7 +20,7 @@ class TopicsController < ApplicationController
         @topic.user = current_user
         respond_to do |format|
             if @topic.save
-                format.html { redirect_to @topic, notice: "Topic created!" }
+                format.html { redirect_to topic_posts_path(@topic), notice: "Topic created!" }
                 format.json { render :show, status: :created, location: @topic }
             else
                 format.html { render :new, status: :unprocessable_entity }
