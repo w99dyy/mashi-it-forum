@@ -72,7 +72,7 @@
           <div class="flex justify-between text-sm text-gray-400">
             <div>
               <span class="mr-1">
-              <%= t :Posted%> <%= time_ago_in_words(post.updated_at) %> ago</span>
+               Posted <%= time_ago_in_words(post.updated_at) %> ago</span>
               <% if post.updated_at.present? && post.updated_at > post.created_at + 1.minute %>
                 • <span>Edited <%= time_ago_in_words(post.updated_at) %> ago</span>
               <% end %>
