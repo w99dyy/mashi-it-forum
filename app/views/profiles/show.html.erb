@@ -61,9 +61,44 @@
 
       </div>
 
-    </div>
+       <!-- User Info -->
+      <div class="block sm:hidden text-center pt-4">
+        <h1 class="text-2xl font-bold"><%= @user.username %></h1>
 
+        <% if current_user == @user %>
+        <p class="text-gray-600 mb-4"><%= @user.email %></p>
+        <% end %>
+
+        <!-- Wallet section — only shown to profile owner -->
+        <% if current_user == @user %>
+          <div data-controller="wallet">
+            <div class=" p-4 rounded-lg >
+              <div>
+                <p class="font-medium">Wallet Status</p>
+                <% if @user.wallet_connected? %>
+                  <p class="text-sm text-green-600">Connected</p>
+                  <p class="text-sm text-gray-500 font-mono">
+                    <%= "#{@user.wallet_address.first(6)}...#{@user.wallet_address.last(4)}" %>
+                  </p>
+                <% else %>
+                  <p class="text-sm text-gray-500">Not connected</p>
+                <% end %>
+              </div>
+
+              <button data-wallet-target="button"
+                      data-action="click->wallet#toggle"
+                      class="px-6 py-2 rounded-lg text-white transition
+                             <%= @user.wallet_connected? ? 'bg-red-600 hover:bg-red-700' : 'bg-[#ed5024] hover:bg-[#e0603c]' %>">
+                <%= @user.wallet_connected? ? 'Disconnect Wallet' : 'Connect Wallet' %>
+              </button>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
      
+
+    </div>
 
   </div>
 
@@ -96,9 +131,9 @@
         <div class="tags mb-4">
           <div class="flex flex-wrap gap-2">
             <% post.tags.each do |tag| %>
-             <%= link_to tag.name, tagged_path(tag: tag.name),
-          class: "bg-[#de7200] text-white px-3 py-1 rounded-full text-sm hover:bg-[#df8322]" %>
-
+            <div class="bg-[#de7200] text-white px-3 py-1 rounded-full text-sm">
+             <%= tag.name %>
+            </div>
             <% end %>
           </div>
         </div>
