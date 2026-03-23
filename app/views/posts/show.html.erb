@@ -15,18 +15,33 @@
       <% end %>
       
     </h2>
+<button id="comment_main_btn" onclick="toggleForm(this)" class="btn btn-white bg-[#ed5024] hover:bg-[#e0603c] pb-1 pr-8 pl-8 inline-block font-medium rounded-full shadow transition duration-200">Comment</button>
 
-    <%= turbo_frame_tag "post_comment_form" do %>
-    <%= render "comments/form", topic: @topic, post: @post, comment: @comment %>
-    <% end %>
+<div id="comment_form_container" style="display: none;">
+  <%= turbo_frame_tag "post_comment_form" do %>
+    <%= render "comments/form", topic: @topic, post: @post, comment: @comment, parent: nil %>
+  <% end %>
+</div>
+
+<script>
+function toggleForm(button) {
+  const container = document.getElementById('comment_form_container');
+  if (container.style.display === 'none') {
+    container.style.display = 'block';
+    button.style.display = 'none';
+  } else {
+    container.style.display = 'none';
+    button.style.display = 'inline-block';
+  }
+}
+</script>
 
   </div>
 
   <hr class="my-2 border-[#2a2a2a]" />
   <%= turbo_frame_tag "post_#{@post.id}_comments" do %>
-   <%= render partial: "comments/comment", collection: @post.comments %>
+   <%= render partial: "comments/comment", collection: @comments, locals: { replies: @replies } %>
   <% end %>
-
 
 </div>
 
