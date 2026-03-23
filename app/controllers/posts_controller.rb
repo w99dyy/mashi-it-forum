@@ -5,17 +5,19 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    if params[:tag].present?
-        @posts = Post.by_tag(params[:tag])
+    @posts = if params[:tag].present?
+    Post.by_tag(params[:tag])
     else
-      @posts = @topic.posts.order(created_at: :desc)
-    end
+    @topic.posts
+    end.includes(:taggings, :tags, :user, :comments).order(created_at: :desc)
   end
 
   # GET /posts/1 or /posts/1.json
   def show
     @post = @topic.posts.find(params[:id])
-    @comments = @post.comments.order(created_at: :desc)
+    all_comments = @post.comments.includes(:user, :rich_text_body).to_a
+    @comments = all_comments.select { |c| c.parent_id.nil? }
+    @replies = all_comments.group_by(&:parent_id)
     @comment = Comment.new
   end
 
@@ -70,21 +72,25 @@ class PostsController < ApplicationController
     end
   end
 
+  def tagged
+  @posts = Post.tagged_with(params[:tag]).includes(:taggings, :tags, :user).order(created_at: :desc)
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
 
   def set_topic
     @topic = Topic.find(params[:topic_id])
   end
-    def set_post
-      @post = @topic.posts.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.expect(post: [ :title, :body ])
-      params.require(:post).permit(:title, :body, :tag_list)
-    end
+  def set_post
+    @post = @topic.posts.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(:title, :body, :tag_list)
+  end
 
   def update_avatar_from_wallet
     mashit_data = params[:mashit_data]
