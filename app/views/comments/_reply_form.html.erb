@@ -1,0 +1,18 @@
+  <div id="reply_form_wrapper_<%= comment.id %>">
+    <%= turbo_frame_tag "reply_form_#{comment.id}" do %>
+      <%= form_with(model: [@topic, @post, Comment.new(parent_id: comment.id)]) do |form| %>
+        <%= form.hidden_field :parent_id %>
+        <%= form.rich_text_area :body, id: "reply_body_#{comment.id}" %>
+        
+        <div class="flex gap-2 items-center mt-2">
+          <%= form.submit "Reply", class: "bg-[#ed5024] hover:bg-[#e0603c] py-1 px-8 pr-5 pl-5 font-medium rounded-full shadow transition duration-200 cursor-pointer" %>
+          
+          <button type="button" 
+                  onclick="document.getElementById('reply_form_container_<%= comment.id %>').style.display='none'; document.getElementById('reply_button_<%= comment.id %>').style.display='flex'"
+                  class="bg-gray-500 hover:bg-gray-600 py-1 px-8 font-medium rounded-full shadow transition duration-200 text-white">
+            Cancel
+          </button>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
