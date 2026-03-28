@@ -37,16 +37,6 @@ class CommentsController < ApplicationController
     @comment.destroy
   end
 
-  def depth
-  d = 0
-  c = self
-  while c.parent_id.present?
-    d += 1
-    c = c.parent
-  end
-  d
-  end
-
   private
 
   def set_topic
