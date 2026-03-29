@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "pages/about"
   namespace :admin do
     root to: "dashboard#index"
     resources :posts, only: [ :index, :destroy ]
@@ -26,8 +27,22 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   resources :topics do
+    member do
+      patch :pin
+      patch :unpin
+    end
+
     resources :posts do
-      resources :comments, only: [ :create, :edit, :update, :destroy ]
+      member do
+        patch :pin
+        patch :unpin
+      end
+        resources :comments, only: [ :create, :edit, :update, :destroy ] do
+        member do
+          patch :pin
+          patch :unpin
+        end
+      end
     end
   end
 
@@ -39,6 +54,7 @@ Rails.application.routes.draw do
   get "/users/:username/edit", to: "profiles#edit", as: "edit_profile"
   patch "/users/:username", to: "profiles#update"
 
+  get "/about", to: "pages#about"
 
   post "/wallet/check_availability", to: "wallet#check_availability"
   post "/wallet/connect",            to: "wallet#connect"
