@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_26_155707) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_28_143247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -76,9 +76,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_26_155707) do
     t.integer "comments_count"
     t.datetime "created_at", null: false
     t.integer "parent_id"
+    t.boolean "pinned", default: false, null: false
     t.bigint "post_id", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["post_id", "pinned"], name: "index_comments_on_post_id_and_pinned"
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -123,10 +125,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_26_155707) do
     t.text "body"
     t.integer "comments_count"
     t.datetime "created_at", null: false
+    t.boolean "pinned", default: false, null: false
     t.string "title"
     t.integer "topic_id"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["pinned"], name: "index_posts_on_pinned"
     t.index ["topic_id"], name: "index_posts_on_topic_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -171,12 +175,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_26_155707) do
     t.text "content"
     t.datetime "created_at", null: false
     t.boolean "locked"
-    t.boolean "pinned"
+    t.boolean "pinned", default: false, null: false
     t.integer "posts_count"
     t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.integer "views_count"
+    t.index ["pinned"], name: "index_topics_on_pinned"
     t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
