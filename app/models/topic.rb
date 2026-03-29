@@ -1,4 +1,6 @@
 class Topic < ApplicationRecord
+  include Pinnable
+
   belongs_to :user
   has_many :posts, dependent: :destroy
   validates :title, presence: { message: "cannot be blank!" },
