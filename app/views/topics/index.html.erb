@@ -7,7 +7,7 @@
     <h1 class="text-2xl font-bold text-white mb-4"> Topics </h1>
     <p class="text-gray-400 text-sm "> Browse all posts </p>
     <p class="float-right text-gray-400 hidden sm:block">Comments</p>
-    <p class="text-gray-400 float-right pr-7 hidden sm:block"> Posts </p>
+    <p class="text-gray-400 float-right pr-5 hidden sm:block"> Posts </p>
   </div>
 
   <!-- Topics List -->
@@ -18,7 +18,7 @@
       <div class="topic mt-4">
 
       <div class="float-right text-gray-400 hidden sm:block">
-      <div class="flex items-center gap-22 pr-7">
+      <div class="flex items-center gap-22">
         <span><%= topic.posts_count.to_i %> </span>
         <span><%= topic.posts.sum { |p| p.comments_count.to_i } %></span>
       </div>
@@ -31,9 +31,12 @@
         <span><%= topic.posts.sum { |p| p.comments_count.to_i } %></span>
       </div>
       </div>
-
+        <div class="flex flex-wrap">
+        <% if topic.pinned? %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-pinned"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M16 3a1 1 0 0 1 .117 1.993l-.117 .007v4.764l1.894 3.789a1 1 0 0 1 .1 .331l.006 .116v2a1 1 0 0 1 -.883 .993l-.117 .007h-4v4a1 1 0 0 1 -1.993 .117l-.007 -.117v-4h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-2a1 1 0 0 1 .06 -.34l.046 -.107l1.894 -3.791v-4.762a1 1 0 0 1 -.117 -1.993l.117 -.007h8z" /></svg>
+        <% end %>
         <h2><%= link_to topic.title, topic_posts_path(topic), class: "hover:text-[#ababab] transition font-bold" %></h2>
-        <p><%= topic.content %></p>
+        </div>
         <!-- Tags -->
 
       <% if topic.tags.any? %>
