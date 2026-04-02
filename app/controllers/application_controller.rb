@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def make_me_admin
-    if current_user && current_user.email == "your-email@example.com"
+    if current_user && current_user.email == "huzskywalker@tutamail.com"
       current_user.update(admin: true)
       redirect_to root_path, notice: "You are now an admin!"
     else
