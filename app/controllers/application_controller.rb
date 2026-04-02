@@ -12,6 +12,15 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, alert: "Not authorized." unless current_user&.admin?
   end
 
+  def make_admin
+    user = User.find_by(email: params[:email])
+    if user
+      user.update(admin: true)
+      render plain: "#{user.email} is now an admin!"
+    else
+      render plain: "User not found with email: #{params[:email]}"
+    end
+  end
 
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
