@@ -18,20 +18,22 @@
   </button>
   
   <div class="absolute right-0 sm:right-auto divide-y divide-[#2a2a2a] text-sm mt-4 opacity-0 invisible peer-focus:opacity-100 peer-focus:visible transition-all duration-200 bg-[#161616] rounded-lg shadow-[0_20px_40px_-1px_rgba(0,0,0,0.3)] w-48 z-10">
+
+  <% if current_user&.admin? %>
+       <% if @post.pinned? %>
+        <%= button_to "Unpin", unpin_topic_post_path(@topic, @post), method: :patch, 
+            class: "block w-full text-left px-4 py-2 text-sm text-white hover:text-[#ababab] rounded-lg" %>
+      <% else %>
+        <%= button_to "Pin", pin_topic_post_path(@topic, @post), method: :patch, 
+            class: "block w-full text-left px-4 py-2 text-sm text-white hover:text-[#ababab] rounded-lg" %>
+      <% end %>
+
     <%= link_to "Edit Post", edit_topic_post_path(@topic, @post), 
     class: "block px-4 py-4 hover:text-[#ababab] cursor-pointer" %> 
 
       <%= button_to "Delete post", [@topic, @post], method: :delete, 
       class: "block w-full text-left px-4 py-4 hover:text-[#ababab] cursor-pointer",
       data: { turbo_confirm: "Are you sure?" } %>
-        <% if current_user&.admin? %>
-       <% if @post.pinned? %>
-        <%= button_to "Unpin", unpin_topic_post_path(@topic, @post), method: :patch, 
-            class: "block w-full text-left px-4 py-2 text-sm text-white hover:text-[#ababab] hover:bg-gray-800 rounded-lg" %>
-      <% else %>
-        <%= button_to "Pin", pin_topic_post_path(@topic, @post), method: :patch, 
-            class: "block w-full text-left px-4 py-2 text-sm text-white hover:text-[#ababab] hover:bg-gray-800 rounded-lg" %>
-      <% end %>
       <% end %>
 
   </div>
@@ -81,6 +83,7 @@
           <%= render 'avatar_pfp/mashit_avatar', user: @post.user %>
         </div>
         <div>
+
         <div class="flex flex-wrap items-center gap-1">
           <span class="font-medium"><%= post.user.username %></span>
         <% if user_has_badges?(post.user, "Developer") %>
