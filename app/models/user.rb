@@ -14,7 +14,6 @@ class User < ApplicationRecord
   has_one :profile
   has_one_attached :avatar
 
-
     def wallet_connected?
       wallet_address.present?
     end
