@@ -40,7 +40,14 @@ gem "ruby-vips", "~> 2.3"
 gem "merit"
 
 # resend for mails
-gem 'resend'
+gem "resend"
+
+# admin dashboard
+gem "avo"
+
+# dashboard
+gem "chartkick"
+
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
