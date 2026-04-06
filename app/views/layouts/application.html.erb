@@ -65,7 +65,6 @@
   </header>
 
     <!-- pinned nav bar -->
-    <% unless @exception || response.status.in?([404, 500, 422, 406, 500 ]) %>
   <div class="flex flex-grow">
     <nav class="md:flex w-1/6 flex-col hidden sticky top-0 h-screen pt-4 pr-5 pl-5 border-r border-[#2a2a2a]">
         <ul class="space-y-2">  <!-- space-y-2 adds vertical spacing between items -->
@@ -82,7 +81,6 @@
     <% end %>
     <div class="border-b border-[#2a2a2a]"></div>
       </li>
-      <% end %>
 
       <!-- topics page -->
       <li>
