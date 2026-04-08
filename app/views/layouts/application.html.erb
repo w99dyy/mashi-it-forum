@@ -42,7 +42,7 @@
     </div>
     <ul class="divide-y divide-[#2a2a2a]">
       <li>
-        <%= link_to "View Profile", profile_path(current_user.username), class: "block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800" %>
+        <%= link_to "View Profile", profile_path(current_user), class: "block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800" %>
       </li>
       <% if current_user&.admin? %>
         <li class="block sm:hidden">
@@ -60,7 +60,7 @@
   </div>
 </div>
   <% else %>
-    <%= link_to "Sign in", new_user_session_path, class: "bg-[#ed5024] hover:bg-[#e0603c] inline-block text-white font-medium py-2 px-4 rounded-full shadow transition duration-200 ml-auto" %>
+    <%= link_to "Sign in", sign_in_path, class: "bg-[#ed5024] hover:bg-[#e0603c] inline-block text-white font-medium mr-2 py-2 px-4 rounded-full shadow transition duration-200 ml-auto" %>
   <% end %>
   </header>
 
