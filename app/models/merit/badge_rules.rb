@@ -50,7 +50,7 @@ module Merit
       end
 
       grant_on ['users#create', 'users#update'], badge: 'admin', to: :user do |user|
-        user.name.present? && user.email.present?
+        user.admin?
       end
     end
   end
