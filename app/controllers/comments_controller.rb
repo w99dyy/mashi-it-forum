@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_topic
   before_action :set_post
   before_action :set_comment, only: [ :edit, :update, :destroy, :pin, :unpin ]
-  before_action :authenticate_user!
 
   def create
     @comment = @post.comments.new(comment_params.merge(user: current_user))
@@ -50,7 +50,7 @@ class CommentsController < ApplicationController
   private
 
   def set_topic
-    @topic = Topic.find(params[:topic_id])
+    @topic = Topic.friendly.find(params[:topic_id])
   end
 
   def set_comment
@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:post_id])
+    @post = Post.friendly.find(params[:post_id])
   end
 
   def comment_params

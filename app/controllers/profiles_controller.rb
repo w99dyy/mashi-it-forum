@@ -56,7 +56,7 @@ class ProfilesController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by(username: params[:username]) || current_user
+    @user = User.friendly.find(params[:username]) || current_user
   end
 
   def profile_params

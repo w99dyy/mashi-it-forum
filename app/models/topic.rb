@@ -1,6 +1,9 @@
 class Topic < ApplicationRecord
   include Pinnable
 
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   belongs_to :user
   has_many :posts, dependent: :destroy
   validates :title, presence: { message: "cannot be blank!" },

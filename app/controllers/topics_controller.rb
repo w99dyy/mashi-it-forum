@@ -35,11 +35,11 @@ class TopicsController < ApplicationController
     end
 
     def edit
-        @topic = Topic.find(params[:id])
+        @topic = Topic.friendly.find(params[:id])
     end
 
     def update
-        @topic = Topic.find(params[:id])
+        @topic = Topic.friendly.find(params[:id])
 
         if @topic.update(topic_params)
             redirect_to @topic, notice: "Topic updated!"
@@ -49,7 +49,7 @@ class TopicsController < ApplicationController
     end
 
     def destroy
-        @topic = Topic.find(params[:id])
+        @topic = Topic.friendly.find(params[:id])
         @topic.destroy
         redirect_to topics_path, notice: "Topic deleted!"
     end
@@ -65,13 +65,13 @@ class TopicsController < ApplicationController
     end
 
     def lock
-        @topic = Topic.find(params[:id])
+        @topic = Topic.friendly.find(params[:id])
         @topic.update(locked: true)
         redirect_to @topic, notice: "Topic has been locked!"
     end
 
     def unlock
-        @topic = Topic.find(params[:id])
+        @topic = Topic.friendly.find(params[:id])
         @topic.update(locked: false)
         redirect_to @topic, notice: "Topic has been unlocked!"
     end
@@ -89,6 +89,6 @@ class TopicsController < ApplicationController
     end
 
     def set_topic
-        @topic = Topic.find(params[:id])
+        @topic = Topic.friendly.find(params[:id])
     end
 end

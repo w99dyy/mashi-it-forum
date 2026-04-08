@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_05_230746) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_07_235805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -86,6 +86,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_05_230746) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.datetime "created_at"
+    t.string "scope"
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
   create_table "merit_actions", force: :cascade do |t|
     t.string "action_method"
     t.integer "action_value"
@@ -128,11 +139,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_05_230746) do
     t.datetime "created_at", null: false
     t.boolean "locked", default: false
     t.boolean "pinned", default: false, null: false
+    t.string "slug"
     t.string "title"
     t.integer "topic_id"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["pinned"], name: "index_posts_on_pinned"
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["topic_id"], name: "index_posts_on_topic_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -188,11 +201,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_05_230746) do
     t.boolean "locked"
     t.boolean "pinned", default: false, null: false
     t.integer "posts_count"
+    t.string "slug"
     t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.integer "views_count"
     t.index ["pinned"], name: "index_topics_on_pinned"
+    t.index ["slug"], name: "index_topics_on_slug", unique: true
     t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
@@ -211,6 +226,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_05_230746) do
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
     t.integer "sash_id"
+    t.string "slug"
     t.string "unconfirmed_email"
     t.datetime "updated_at", null: false
     t.string "username"
@@ -218,6 +234,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_05_230746) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

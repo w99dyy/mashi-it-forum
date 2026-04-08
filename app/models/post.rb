@@ -10,9 +10,12 @@ class Post < ApplicationRecord
     has_one_attached :avatar
     has_one_attached :cover_image
 
-    def thumbnail
-      body.embeds.attachments.first&.blob
-    end
+    extend FriendlyId
+    friendly_id :title, use: :slugged
+
+  #  def thumbnail
+  #    body.embeds.attachments.first&.blob
+  #  end
 
     scope :by_tag, ->(tag) { tagged_with(tag) if tag.present? }
 
