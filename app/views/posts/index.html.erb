@@ -1,18 +1,39 @@
 <% content_for :title, @topic.title %>
 
-<div class="posts-page px-3">
-  <!-- Page Header -->
-  <div class="float-right max-w-full hidden sm:flex flew-wrap relative">
-  <%= link_to "New Post", new_topic_post_path(@topic), class: "sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-[#ed5024] hover:bg-[#e0603c] inline-block font-medium" %>
+  <div class="posts-page px-3">
+    <!-- Page Header -->
+    <div class="mb-2 border-b border-[#2a2a2a] pb-3">
+          <div class="flex sm:hidden flex-col gap-3">
+    <h1 class="text-2xl font-bold break-words">
+      <%= @topic.title %>
+    </h1>
   </div>
 
-  <div class="mb-2 border-b border-[#2a2a2a] pb-8">
-    <h1 class="text-2xl font-bold text-white mb-4"> <%= @topic.title %> </h1>
-      <div class="max-w-full flex sm:hidden justify-end">
-  <%= link_to "New Post", new_topic_post_path(@topic), class: "text-center mt-2  rounded-md px-3.5 py-2.5 bg-[#ed5024] hover:bg-[#e0603c] inline-block font-medium" %>
+  <%# New post for Mobile %>
+  <div class="fixed bottom-6 right-6 sm:hidden z-50">
+    <%= link_to new_topic_post_path(@topic), 
+        class: "bg-[#ed5024] hover:bg-[#e0603c] text-white rounded-full p-4 shadow-lg flex items-center justify-center" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    <% end %>
   </div>
-    <p class="float-right text-gray-400 hidden sm:block">Activity</p>
-    <p class="text-gray-400 float-right pr-5 hidden sm:block"> Comments </p>
+  <div class="hidden sm:flex justify-between items-center">
+    <div class="flex-1 min-w-0 items-center gap-3">
+      <h1 class="text-2xl font-bold break-words overflow-hidden"><%= @topic.title %></h1>
+    </div>
+    
+    <div class="flex items-center gap-3">
+          <%= link_to new_topic_post_path(@topic), class: "rounded-md px-3 py-1 bg-[#ed5024] hover:bg-[#e0603c] font-medium flex items-center gap-1" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+          <span>New post</span>
+          <% end %>
+
+      <p class="text-gray-400">Comments</p>
+      <p class="text-gray-400">Activity</p>
+    </div>
+    </div>
   </div>
 
   <!-- Posts List -->
@@ -24,21 +45,24 @@
 
             <div class="float-left">
 
-            <%= link_to render('avatar_pfp/mashit_avatar_sm', user: post.user), profile_path(post.user.username) %>
+            <%= link_to render('avatar_pfp/mashit_avatar_sm', user: post.user), profile_path(post.user) %>
             </div>
 
-            <div class="overflow-hidden">
-
-                <!-- Post Metadata -->
-          
-          <div class="text-gray-400 float-right hidden sm:block">
-            <div class="flex items-center gap-17">
-              <span> <%= post.comments.size %> </span>
-              <span> <%= time_ago_in_words(post.updated_at) %> </span>
+        <div class="overflow-hidden">
+        <div class="text-gray-400 float-right hidden sm:block">
+          <div class="flex items-center">
+            <div class="min-w-[2.5rem] text-center tabular-nums">
+              <%= post.comments.size %>
             </div>
+            
+            <div class="min-w-[5rem] text-right tabular-nums">
+              <%= time_ago_in_words(post.updated_at) %>
             </div>
+            <%=  %>
+          </div>
+        </div>
         
-          <!-- thumbnail -->
+          <%# thumbnail %>
             <%# if post.thumbnail %>
               <%# link_to image_tag(post.thumbnail.representation(resize_to_limit: [100, 100])), topic_post_path(@topic, post), class: "float-left pr-5" %>
             <%# end %>
@@ -48,10 +72,10 @@
           <!-- Post Title -->
         <div class="flex flex-wrap">
         <% if post.pinned? %>
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-pinned mt-1"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M16 3a1 1 0 0 1 .117 1.993l-.117 .007v4.764l1.894 3.789a1 1 0 0 1 .1 .331l.006 .116v2a1 1 0 0 1 -.883 .993l-.117 .007h-4v4a1 1 0 0 1 -1.993 .117l-.007 -.117v-4h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-2a1 1 0 0 1 .06 -.34l.046 -.107l1.894 -3.791v-4.762a1 1 0 0 1 -.117 -1.993l.117 -.007h8z" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-pinned mt-1" style="color: gray";><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M16 3a1 1 0 0 1 .117 1.993l-.117 .007v4.764l1.894 3.789a1 1 0 0 1 .1 .331l.006 .116v2a1 1 0 0 1 -.883 .993l-.117 .007h-4v4a1 1 0 0 1 -1.993 .117l-.007 -.117v-4h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-2a1 1 0 0 1 .06 -.34l.046 -.107l1.894 -3.791v-4.762a1 1 0 0 1 -.117 -1.993l.117 -.007h8z" /></svg>
         <% end %>
-          <h2 class="text-md sm:text-base md:text-lg font-bold mb-3">
-           <%= link_to truncate(post.title, length: 100), topic_post_path(@topic, post), class: "hover:text-[#ababab] transition" %>
+          <h2 class="text-md sm:text-base md:text-lg font-bold mb-3 flex-1">
+           <%= link_to truncate(post.title, length: 70), topic_post_path(@topic, post), class: "hover:text-[#ababab] transition" %>
           </h2>
         </div>
         
