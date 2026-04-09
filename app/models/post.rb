@@ -31,7 +31,17 @@ class Post < ApplicationRecord
 
   validate :has_tags
 
+  validate :tags_must_exist
+
   validate :topic_not_locked, on: :create
+
+  def tags_must_exist
+    tag_list.each do |tag_name|
+      unless ActsAsTaggableOn::Tag.exists?(name: tag_name)
+        errors.add(:tag, "#{tag_name} is not valid")
+      end
+    end
+  end
 
   private
 
