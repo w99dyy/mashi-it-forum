@@ -16,10 +16,9 @@ class Users::ConfirmationController < Devise::ConfirmationsController
      self.resource = resource_class.confirm_by_token(params[:confirmation_token])
      if resource.errors.empty?
       set_flash_message!(:notice, :confirmed)
-      sign_in(resource_name, resource)
-      redirect_to root_path
+      redirect_to sign_in_path, notice: "Email confirmed! Please sign in."
      else
-      redirect_to new_user_session_path, alert: "Invalid URL or expired confirmation token."
+      redirect_to sign_in_path, alert: "Invalid URL or expired confirmation token."
      end
     end
 
@@ -36,6 +35,6 @@ class Users::ConfirmationController < Devise::ConfirmationsController
    # end
 
    def after_confirmation_path_for(resource_name, resource)
-      root_path
+      sign_in_path
     end
 end
