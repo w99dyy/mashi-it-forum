@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_merit
+  after_save :grant_admin_badge, if: :saved_change_to_admin?
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -37,4 +38,14 @@ class User < ApplicationRecord
       rescue JSON::ParserError
       []
     end
+
+    private
+
+    def grant_admin_badge
+      if admin?
+        add_badge(2)
+      else
+        rm_badge(2)
+      end
+  end
 end
