@@ -29,6 +29,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @available_tags = ActsAsTaggableOn::Tag.all.order(:name)
   end
 
   # POST /posts or /posts.json
