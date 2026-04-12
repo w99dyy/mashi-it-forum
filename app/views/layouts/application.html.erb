@@ -5,7 +5,7 @@
     <%= render 'application/favicon' %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Mash It Artists Forum">
+    <meta name="application-name" content="Mash-it Artists Forum">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -66,7 +66,7 @@
 
     <!-- pinned nav bar -->
   <div class="flex flex-grow">
-    <nav class="md:flex w-1/6 flex-col hidden sticky top-0 h-screen pt-4 pr-5 pl-5 border-r border-[#2a2a2a]">
+    <nav class="md:flex w-1/7 flex-col hidden sticky top-0 h-screen pt-4 pr-5 pl-5 border-r border-[#2a2a2a]">
         <ul class="space-y-2">  <!-- space-y-2 adds vertical spacing between items -->
         
         <!-- New topic -->
@@ -115,10 +115,14 @@
     </nav>
 
   <body class="bg-[#161616] min-h-screen text-white">
- 
-    <main class="container mx-auto mt-5 mb-10">
-      <%= yield %>
-    </main>
+        <main class="flex-1 min-w-0">
+        <div class="container mx-auto mt-5 px-4">
+          <%= yield %>
+        </div>
+      </main>
+    </div>
+
+    <%= render "application/footer" %>
   </body>
 </html>
 
