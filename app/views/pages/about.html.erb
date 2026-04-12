@@ -1,3 +1,62 @@
-<div class>
-    <h1>Mash-it</h1>
+<% content_for :title, "About Mash-it" %>
+
+<div class="about-page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+  <div class="bg-[#161616] p-3 sm:p-3 ">
+    <h2 class="text-xl font-bold text-white mb-3">What is Mash-it?</h2>
+    <p class="text-gray-300 leading-relaxed mb-3">
+        Mash-it is a creative platform for uploading, collecting and mashing multi-trait avatars that exist on the blockchain.
+    </p>
+  </div>
+
+    <div class="border-t border-b border-[#2a2a2a] py-4">
+    <div class="flex flex-wrap sm:flex-row flex-col justify-center gap-x-6 gap-y-3">
+        <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
+        <div class="text-2xl font-bold text-[#ed5024]"><%= @community_stats[:members] %></div>
+        <p class="text-sm text-gray-400">Members</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-shield-half"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M11.998 2l.032 .002l.086 .005a1 1 0 0 1 .342 .104l.105 .062l.097 .076l.016 .015l.247 .21a11 11 0 0 0 7.189 2.537l.342 -.01a1 1 0 0 1 1.005 .717a13 13 0 0 1 -9.208 16.25a1 1 0 0 1 -.502 0a13 13 0 0 1 -9.209 -16.25a1 1 0 0 1 1.005 -.717a11 11 0 0 0 7.791 -2.75l.046 -.036l.053 -.041a1 1 0 0 1 .217 -.112l.075 -.023l.036 -.01a1 1 0 0 1 .12 -.022l.086 -.005zm.002 2.296l-.176 .135a13 13 0 0 1 -7.288 2.572l-.264 .006l-.064 .31a11 11 0 0 0 1.064 7.175l.17 .314a11 11 0 0 0 6.49 5.136l.068 .019z" /></svg>
+        <div class="text-2xl font-bold text-[#ed5024]"><%= @community_stats[:admins] %></div>
+        <p class="text-sm text-gray-400">Admins</p>
+        </div>
+        
+        <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-messages"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" /><path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" /></svg>        <div class="text-2xl font-bold text-[#ed5024]"><%= @community_stats[:topics] %></div>
+        <p class="text-sm text-gray-400">Topics</p>
+        </div>
+        
+        <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-ballpen"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14 6l7 7l-4 4" /><path d="M5.828 18.172a2.828 2.828 0 0 0 4 0l10.586 -10.586a2 2 0 0 0 0 -2.829l-1.171 -1.171a2 2 0 0 0 -2.829 0l-10.586 10.586a2.828 2.828 0 0 0 0 4" /><path d="M4 20l1.768 -1.768" /></svg>
+        <div class="text-2xl font-bold text-[#ed5024]"><%= @community_stats[:posts] %></div>
+        <p class="text-sm text-gray-400">Posts</p>
+        </div>
+    </div>
+    </div>
+
+<div class="mb-8 mt-4">
+  <h2 class="text-xl font-bold mb-6">Our Team</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% @team_members.each do |member| %>
+      <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+        <div class="flex-shrink-0 self-center sm:self-start">
+
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#ed5024] to-[#e0603c] flex items-center justify-center">
+            <span class="text-2xl font-bold"><%= member[:name].chars.first %></span>
+          </div>
+        </div>
+        
+        <div class="flex-1 text-center sm:text-left">
+          <h3 class="text-lg font-semibold text-white"><%= member[:name] %></h3>
+          <p class="text-[#ed5024] text-sm mb-2"><%= member[:role] %></p>
+          <p class="text-gray-400 text-sm"><%= member[:bio] %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
 </div>
