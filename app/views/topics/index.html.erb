@@ -1,7 +1,7 @@
 <% content_for :title, "All Topics" %>
 
-<div class="posts-page px-3">
-  <!-- Page Header -->
+<div class="posts-page">
+  <%# Page Header %>
 
   <div class="mb-2 border-b border-[#2a2a2a] pb-8">
     <h1 class="text-2xl font-bold text-white mb-4 break-words"> Topics </h1>
@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <!-- Topics List -->
+  <%# Topics List %>
   
   <div class="posts-container divide-y divide-[#2a2a2a] overflow-visible">
   <% if @topics.any? %>
@@ -43,7 +43,7 @@
         </span>
         </h2>
         </div>
-        <!-- Tags -->
+        <%# Tags %>
 
       <% if topic.tags.any? %>
         <div class="tags mb-4 mt-2">

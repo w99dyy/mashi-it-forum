@@ -1,7 +1,7 @@
 <% content_for :title, @topic.title %>
 
-  <div class="posts-page px-3">
-    <!-- Page Header -->
+  <div class="posts-page">
+    <%# Page Header %>
     <div class="mb-2 border-b border-[#2a2a2a] pb-3">
       <div class="flex sm:hidden flex-col gap-3">
       <h1 class="text-xl font-bold break-words">
@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <!-- Posts List -->
+  <%# Posts list %>
   <div class="posts-container divide-y divide-[#2a2a2a]">
   
     <% if @posts.any? %>
@@ -86,7 +86,7 @@
 
               
           
-          <!-- Post Title -->
+          <%# Post title %>
         <div class="flex flex-wrap items-center mb-2">
           <h2 class="text-md sm:text-base md:text-lg font-bold">
            <%= link_to truncate(post.title, length: 70), topic_post_path(@topic, post), class: "hover:text-[#ababab] transition" %>
@@ -102,7 +102,7 @@
           </h2>
         </div>
         
-          <!-- Tags -->
+          <%# Tags %>
 
           <% if post.tags.any? %>
             <div class="tags">
@@ -124,7 +124,7 @@
         <% end %>
       <% else %>
       
-      <!-- Empty State -->
+      <%# Empty State %>
     
       <div class="empty-state text-center py-16 rounded-lg">
         <h3 class="text-2xl font-bold text-white mb-2">No posts yet</h3>
