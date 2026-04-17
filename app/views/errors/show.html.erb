@@ -1,52 +1,51 @@
   <%# desktop error %>
-  <div class="hidden md:flex items-center flex-row justify-center gap-5">
-        <img src="/error_image/mashi-head.png" width="350" hight="350" alt="404">
+  <div class="hidden md:flex items-center justify-center gap-5">
+    <img src="/error_image/mashi-head.png" width="350" height="350" alt="404">
 
-      <div style="margin-top: 90px;">
+    <div class="flex flex-col">
+      <h1 class="font-bold text-6xl"><%= response.code %></h1>
+
+      <% case response.code.to_i %>
+      <% when 400 %>
+        <p class="mt-2">Bad Request.</p>
+      <% when 404 %>
+        <p class="mt-2">Page Not Found.</p>
+      <% when 406 %>
+        <p class="mt-2">You're trying to reach a page that isn't available.</p>
+      <% when 422 %>
+        <p class="mt-2">Unprocessable Entity.</p>
+      <% when 500 %>
+        <p class="mt-2">Internal Server Error.</p>
+      <% else %>
+        <p class="mt-2">An unexpected error occurred.</p>
+      <% end %>
+
+      <%= link_to "Go back home", root_path, class: "inline-block bg-[#ed5024] hover:bg-[#e0603c] text-white px-6 py-3 rounded-lg transition mt-3 w-fit" %>
+    </div>
+  </div>
+
+      <%# mobile error %>
+    <div class="flex sm:hidden flex-col items-center justify-center gap-5 min-h-screen">
+      <img src="/error_image/mashi-head.png" width="250" height="250" alt="404">
+
+      <div class="text-center">
         <h1 class="font-bold text-6xl"><%= response.code %></h1>
 
-          <% case response.code.to_i %>
-          <% when 400 %>
-            <p> Bad Request.</p>
-          <% when 404 %>
-            <p>Page Not Found.</p>
-          <% when 406 %>
-            <p>You're trying to reach a page that isn't available.</p>
-          <% when 422 %>
-            Unprocessable Entity.
-          <% when 500 %>
-            Internal Server Error.
-          <% else %>
-            An unexpected error occurred.
-          <% end %>
+        <% case response.code.to_i %>
+        <% when 400 %>
+          <p class="mt-2">Bad Request.</p>
+        <% when 404 %>
+          <p class="mt-2">Page Not Found.</p>
+        <% when 406 %>
+          <p class="mt-2 max-w-sm">You're trying to reach a page that isn't available.</p>
+        <% when 422 %>
+          <p class="mt-2">Unprocessable Entity.</p>
+        <% when 500 %>
+          <p class="mt-2">Internal Server Error.</p>
+        <% else %>
+          <p class="mt-2">An unexpected error occurred.</p>
+        <% end %>
 
         <%= link_to "Go back home", root_path, class: "inline-block bg-[#ed5024] hover:bg-[#e0603c] text-white px-6 py-3 rounded-lg transition mt-3" %>
       </div>
-  </div>
-
-  <%# mobile error %>
-    <div class="flex sm:hidden flex-col items-center gap-5">
-        <img src="/error_image/mashi-head.png" width="300" hight="300" alt="404">
-
-      <div class="text-center" >
-        <h1 class="font-bold text-6xl"><%= response.code %></h1>
-
-          <% case response.code.to_i %>
-          <% when 400 %>
-            <p> Bad Request.</p>
-          <% when 404 %>
-            <p>Not Found.</p>
-          <% when 406 %>
-            <p>Not Acceptable. You're trying to reach a page that isn't available.</p>
-          <% when 422 %>
-            Unprocessable Entity.
-          <% when 500 %>
-            Internal Server Error.
-          <% else %>
-            An unexpected error occurred.
-          <% end %>
-
-        <%= link_to "Go back home", root_path, class: "inline-block bg-[#ed5024] hover:bg-[#e0603c] text-white px-6 py-3 rounded-lg transition mt-3" %>
-      </div>
-  </div>
-
+    </div>
