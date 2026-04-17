@@ -51,6 +51,9 @@ gem "chartkick"
 # Friendly URL
 gem 'friendly_id', '~> 5.5.0'
 
+# Pagination
+gem 'kaminari'
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
