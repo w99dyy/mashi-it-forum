@@ -128,8 +128,8 @@
   
 <div class=" divide-y divide-[#2a2a2a]">
 
-<% if @user.posts.any? %>
-  <% @user.posts.each do |post| %>
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
     <div class="post-card p-6 pb-8 " >
 
     <%# if post.thumbnail %>
@@ -178,4 +178,6 @@
     <div class="text-6xl mb-4">📝</div>
     <h3 class="text-2xl font-bold text-white mb-5 ">No posts yet.</h3>
 <% end %>
+<%= paginate @posts %>
+
 </div>
