@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
 
   def show
     # @user is already set by set_user
+    @posts = @user.posts.includes(:tags, :topic, :rich_text_body).order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def edit

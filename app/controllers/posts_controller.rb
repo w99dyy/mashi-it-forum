@@ -10,12 +10,12 @@ class PostsController < ApplicationController
     Post.by_tag(params[:tag]).pinned_first
     else
     @topic.posts
-    end.includes(:taggings, :tags, :user, :comments).pinned_first
+    end.includes(:taggings, :tags, :user, :comments).page(params[:page]).per(10).pinned_first
   end
 
   # GET /posts/1 or /posts/1.json
   def show
-    all_comments = @post.comments.includes(:user, :rich_text_body, :parent).pinned_first.to_a
+    all_comments = @post.comments.includes(:user, :rich_text_body, :parent, :replies).pinned_first.to_a
     @comments = all_comments.select { |c| c.parent_id.nil? }
     @replies = all_comments.group_by(&:parent_id)
     @comment = Comment.new
