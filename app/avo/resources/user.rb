@@ -16,11 +16,11 @@ class Avo::Resources::User < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :email, as: :text
+  #  field :email, as: :text
     field :username, as: :text
     field :wallet_address, as: :text
     field :mashit_avatar_url, as: :code
-    field :mashit_avatar_synced_at, as: :date_time
+  #  field :mashit_avatar_synced_at, as: :date_time
     field :admin, as: :boolean
     field :confirmation_token, as: :text
     field :confirmed_at, as: :date_time
