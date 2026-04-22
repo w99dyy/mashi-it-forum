@@ -1,6 +1,6 @@
 <% content_for :title, @topic.title %>
 
-  <div class="posts-page min-h-screen">
+  <div class="min-h-screen mx-auto px-2 md:px-0 md:w-5/6">
     <%# Page Header %>
     <div class="mb-2 border-b border-[#2a2a2a] pb-3">
       <div class="flex sm:hidden flex-col gap-3">
@@ -54,11 +54,11 @@
   </div>
 
   <%# Posts list %>
-  <div class="posts-container divide-y divide-[#2a2a2a]">
+  <div class="posts-container">
   
     <% if @posts.any? %>
       <% @posts.each do |post| %>
-        <div class="post-card  p-2 mb-3 pb-4">
+        <div class="post-card bg-[#1a1a1a] rounded-md p-2 mb-3 pb-4 <%= 'bg-orange-500/10' if post.pinned? %>">
 
             <div class="float-left">
 
@@ -134,7 +134,7 @@
       </div>
     <% end %>
 
-    <div class="py-8">
+    <div>
     <%= paginate @posts %>
     </div>
   </div>
